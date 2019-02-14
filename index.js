@@ -1,5 +1,7 @@
-import { getType } from './canine';
+import { getType, compareObjects, compareMaps } from './canine';
 
-const Canine = {
+export default const Canine = {
   getType,
-}
+  compareObjects,
+  compareMaps,
+};
