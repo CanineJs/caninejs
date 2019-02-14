@@ -1,0 +1,26 @@
+{
+  "name": "caninejs",
+  "version": "0.0.2",
+  "description": "Javascript helper library with functions to make programming in js easy.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SreeKrishnaRaja/caninejs.git"
+  },
+  "keywords": [
+    "Canine",
+    "CanineJs",
+    "helpers",
+    "javascript",
+    "js"
+  ],
+  "author": "Sree Krishna Raja K",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SreeKrishnaRaja/caninejs/issues"
+  },
+  "homepage": "https://github.com/SreeKrishnaRaja/caninejs#readme"
+}

@@ -3,6 +3,13 @@ Canine JS is a Javascript helper library with functions to make programming in j
 
 Note: CanineJs is under development. Will add more functions and will optimize existing ones, However the way the existing functions behave won't change. It's safe to use this in a production application.
 
+## Getting Started
+
+Install using npm
+```
+npm i caninejs
+```
+
 ## Available Methods.
 - getType
 - compareObjects
@@ -12,6 +19,8 @@ Note: CanineJs is under development. Will add more functions and will optimize e
 getType accepts an element as input and returns the type of the element as output.
 
 ```
+import { getType } from 'caninejs';
+
 var x = { x: 1 };
 var y = ['1', { x: 1 }, [], 'apple'];
 var z = [];
@@ -37,6 +46,8 @@ getType(n); // returns "function"
 compareObjects accepts two Objects as input and returns true if they are equal else it will return false.
 
 ```
+import { compareObjects } from 'caninejs';
+
 var a = { c: { b: 1, z: ['test']}, a: 1, b: 2 };
 var x = { a: 1, b: 2, c: { b: 1, z: ['test']} };
 var y = { a: 1, b: 2, c: { b: 1, z: ['test2']} };
@@ -52,6 +63,8 @@ compareObjects(x, z); // returns false
 compareMaps accepts two Maps as input and returns true if they are equal else it will return false.
 
 ```
+import { compareMaps } from 'caninejs';
+
 var x = new Map();
 var y = new Map([['a', 'test']]);
 var z = new Map([['a', 'test']]);
@@ -62,7 +75,7 @@ compareMaps(x, z); // returns false
 ```
 ## Contributions
 
-Created by Sree Krishna Raja [Github](https://github.com/sreekrishnaraja) [Twitter](https://twitter.com/sreekrishnaraja)
+Created by Sree Krishna Raja [Github](https://github.com/sreekrishnaraja) [Twitter](https://twitter.com/sreekrishnaraja) 
 
 ## License
 MIT
