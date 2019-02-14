@@ -119,11 +119,3 @@ export function compareArrays(arrayOne, arrayTwo) {
   }
   return true;
 }
-
-export default const Canine = {
-  getType,
-  compare,
-  compareObjects,
-  compareMaps,
-  compareArrays,
-};
