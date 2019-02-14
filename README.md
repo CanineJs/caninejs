@@ -1,14 +1,14 @@
-*** Canine JS
+### Canine JS
 Canine JS is a Javascript helper library with functions to make programming in js easy.
 
 Note: CanineJs is under development. Will add more functions and will optimize existing ones, However the way the existing functions behave won't change. It's safe to use this in a production application.
 
-** Available Methods.
+## Available Methods.
 - getType
 - compareObjects
 - compareMaps
 
-** getType
+# getType
 getType accepts an element as input and returns the type of the element as output.
 
 ```
@@ -33,7 +33,7 @@ getType(m); // returns "set"
 getType(n); // returns "function"
 ```
 
-** compareObjects
+# compareObjects
 compareObjects accepts two Objects as input and returns true if they are equal else it will return false.
 
 ```
@@ -48,7 +48,7 @@ compareObjects(y, z); // returns true
 compareObjects(x, z); // returns false
 ```
 
-** compareMaps
+# compareMaps
 compareMaps accepts two Maps as input and returns true if they are equal else it will return false.
 
 ```
@@ -60,6 +60,9 @@ compareMaps(x, y); // returns false
 compareMaps(y, z); // returns true
 compareMaps(x, z); // returns false
 ```
+## Contributions
 
-** License
+Created by Sree Krishna Raja [Github](https://github.com/sreekrishnaraja) [Twitter](https://twitter.com/sreekrishnaraja)
+
+## License
 MIT
