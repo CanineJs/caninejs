@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/SreeKrishnaRaja/caninejs/issues"
   },
-  "homepage": "https://github.com/SreeKrishnaRaja/caninejs#readme"
+  "homepage": "https://github.com/SreeKrishnaRaja/caninejs#readme",
+  "devDependencies": {
+    "all-contributors-cli": "^6.1.1"
+  }
 }
