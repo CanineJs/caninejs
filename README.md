@@ -1,5 +1,6 @@
 # Canine JS
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
+
 Canine JS is a Javascript helper library with functions to make programming in js easy.
 
 Note: CanineJs is under development. Not yet ready for production applications. Will release production ready version soon.
@@ -97,10 +98,6 @@ compareArrays(y, z); // returns true;
 compareArrays(x, z); // returns false;
 ```
 
-## Contributions
-
-Created by Sree Krishna Raja [Github](https://github.com/sreekrishnaraja) [Twitter](https://twitter.com/sreekrishnaraja)
-
 ## License
 MIT
 
@@ -110,7 +107,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore -->
-<table><tr><td align="center"><a href="https://github.com/SreeKrishnaRaja"><img src="https://avatars2.githubusercontent.com/u/19948507?v=4" width="100px;" alt="Sree Krishna Raja"/><br /><sub><b>Sree Krishna Raja</b></sub></a><br /><a href="https://github.com/SreeKrishnaRaja/caninejs/commits?author=SreeKrishnaRaja" title="Code">💻</a></td></tr></table>
+<table><tr><td align="center"><a href="https://github.com/SreeKrishnaRaja"><img src="https://avatars2.githubusercontent.com/u/19948507?v=4" width="100px;" alt="Sree Krishna Raja"/><br /><sub><b>Sree Krishna Raja</b></sub></a><br /><a href="https://twitter.com/sreekrishnaraja"><sub><b>Twitter</b></sub></a><br><a href="https://github.com/SreeKrishnaRaja/caninejs/commits?author=SreeKrishnaRaja" title="Code">💻</a></td></tr></table>
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
