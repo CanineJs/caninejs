@@ -1,0 +1,23 @@
+{
+  "projectName": "caninejs",
+  "projectOwner": "SreeKrishnaRaja",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "contributors": [
+    {
+      "login": "SreeKrishnaRaja",
+      "name": "Sree Krishna Raja",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/19948507?v=4",
+      "profile": "https://github.com/SreeKrishnaRaja",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7
+}
