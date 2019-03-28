@@ -1,8 +1,6 @@
 # Canine JS
 Canine JS is a Javascript helper library with functions to make programming in js easy.
 
-Note: CanineJs is under development. Will add more functions and will optimize existing ones, However the way the existing functions behave won't change. It's safe to use this in a production application.
-
 ## Getting Started
 
 Install using npm
