@@ -94,13 +94,17 @@ export function compareMaps(mapOne, mapTwo) {
 }
 
 // Compare two Arrays and all of it's children, returns true if both are same.
-export function compareArrays(arrayOne, arrayTwo) {
+export function compareArrays(arrayOne, arrayTwo, shouldSort = false) {
   if (
     getType(arrayOne) !== "array" ||
     getType(arrayTwo) !== "array" ||
     arrayOne.length !== arrayTwo.length
   ) {
     return false;
+  }
+  if (shouldSort) {
+    arrayOne.sort();
+    arrayTwo.sort();
   }
   for (var key in arrayOne) {
     var type = getType(arrayOne[key]);

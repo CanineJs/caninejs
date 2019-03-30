@@ -95,6 +95,19 @@ compareArrays(y, z); // returns true;
 compareArrays(x, z); // returns false;
 ```
 
+compareArrays will also accept a third boolean input, which is false by default. If true, the arrays will be compared even if they are ordered differently (Result will be true even if the arrays have same values but in different order). If false or left empty, the result will be false for similar arrays with same values in different order.
+
+```
+import { compareArrays } from 'caninejs';
+
+var x = [{ x: '10' }, 1, [1, 'x', 0], 'a'];
+var y = [1, [1, 'x', 0], 'a', { x: '10'}];
+
+compareArrays(x, y, true); // returns true;
+compareArrays(x, y, false); // returns false;
+compareArrays(x, y); // returns false;
+```
+
 ## Contributions
 
 Created by Sree Krishna Raja [Github](https://github.com/sreekrishnaraja) [Twitter](https://twitter.com/sreekrishnaraja)
