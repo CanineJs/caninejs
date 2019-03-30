@@ -35,6 +35,29 @@ export function compare(element1, element2) {
   return true;
 }
 
+function unique(array, isSorted = false, key) {
+  var type = getType(array[0]);
+  var result = [];
+  switch (type) {
+    case "object":
+      return uniqueObjects(array, isSorted, key);
+    case "map":
+      return uniqueMaps(array, isSorted, key);
+    default: {
+      if (!isSorted) {
+        array.sort();
+      }
+      array.forEach((item, index) => {
+        if (index !== array.length - 1 && !compare(item, array[index + 1])) {
+          result.push(item);
+        }
+      });
+      result.push(array[array.length - 1]);
+    }
+  }
+  return result;
+}
+
 // Compare two objects and all of it's children, returns true if both are same.
 export function compareObjects(objectOne, objectTwo) {
   var objectOneKeys = Object.keys(objectOne);
@@ -123,4 +146,52 @@ export function compareArrays(arrayOne, arrayTwo, shouldSort = false) {
     }
   }
   return true;
+}
+
+function uniqueObjects(array, isSorted, key) {
+  if (!isSorted) {
+    array.sort((x, y) => {
+      if (x[key] > y[key]) {
+        return 1;
+      } else if (x[key] < y[key]) {
+        return -1;
+      }
+      return 0;
+    });
+  }
+  var result = [];
+  array.forEach((item, index) => {
+    if (
+      index !== array.length - 1 &&
+      !compare(item[key], array[index + 1][key])
+    ) {
+      result.push(item);
+    }
+  });
+  result.push(array[array.length - 1]);
+  return result;
+}
+
+function uniqueMaps(array, isSorted, key) {
+  if (!isSorted) {
+    array.sort((x, y) => {
+      if (x.get(key) > y.get(key)) {
+        return 1;
+      } else if (x.get(key) < y.get(key)) {
+        return -1;
+      }
+      return 0;
+    });
+  }
+  var result = [];
+  array.forEach((item, index) => {
+    if (
+      index !== array.length - 1 &&
+      !compare(item.get(key), array[index + 1].get(key))
+    ) {
+      result.push(item);
+    }
+  });
+  result.push(array[array.length - 1]);
+  return result;
 }
