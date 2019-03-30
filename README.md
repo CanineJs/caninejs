@@ -205,11 +205,6 @@ var z = [map1, map2, map3];
 uniqueMaps(z, true, 'id'); // returns [map1, map2]
 ```
 
-## Contributions
-
-Created by Sree Krishna Raja [Github](https://github.com/sreekrishnaraja) [Twitter](https://twitter.com/sreekrishnaraja)
-
->>>>>>> Feature: unique, uniqueObjects, uniqueMaps.
 ## License
 MIT
 
