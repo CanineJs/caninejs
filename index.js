@@ -32,6 +32,7 @@ export function compare(element1, element2) {
       }
       break;
   }
+  return true;
 }
 
 // Compare two objects and all of it's children, returns true if both are same.
