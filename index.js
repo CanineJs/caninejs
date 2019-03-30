@@ -25,7 +25,7 @@ export function compare(element1, element2) {
     case "object":
       return compareObjects(element1, element2);
     case "array":
-      return compareArrays(element1, element2);
+      return compareArrays(element1, element2, true);
     default:
       if (element1 !== element2) {
         return false;
@@ -54,7 +54,7 @@ export function compareObjects(objectOne, objectTwo) {
       case "map":
         return compareMaps(objectOne[key], objectTwo[key]);
       case "array":
-        return compareArrays(objectOne[key], objectTwo[key]);
+        return compareArrays(objectOne[key], objectTwo[key], true);
       default:
         if (objectOne[key] !== objectTwo[key]) {
           return false;
@@ -82,7 +82,7 @@ export function compareMaps(mapOne, mapTwo) {
       case "object":
         return compareObjects(value, mapTwo.get(key));
       case "array":
-        return compareArrays(value, mapTwo.get(key));
+        return compareArrays(value, mapTwo.get(key), true);
       default:
         if (value !== mapTwo.get(key)) {
           return false;
@@ -114,7 +114,7 @@ export function compareArrays(arrayOne, arrayTwo, shouldSort = false) {
       case "map":
         return compareMaps(arrayOne[key], arrayTwo[key]);
       case "array":
-        return compareArrays(arrayOne[key], arrayTwo[key]);
+        return compareArrays(arrayOne[key], arrayTwo[key], shouldSort);
       default:
         if (arrayOne[key] !== arrayTwo[key]) {
           return false;
