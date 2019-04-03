@@ -1,14 +1,28 @@
 // Get type of element.
 export function getType(value) {
   if (typeof value === "object") {
-    if (value instanceof Array) {
-      return "array";
-    } else if (value instanceof Map) {
-      return "map";
-    } else if (value instanceof Set) {
-      return "set";
+    switch (Object.prototype.toString.call(value)) {
+      case "[object Object]":
+        return "object";
+      case "[object Array]":
+        return "array";
+      case "[object Map]":
+        return "map";
+      case "[object Set]":
+        return "set";
+      case "[object WeakMap]":
+        return "weakmap";
+      case "[object WeakSet]":
+        return "weakset";
+      case "[object Function]":
+        return "function";
+      case "[object Null]":
+        return "null";
+      case "[object Error]":
+        return "error";
+      default:
+        return "object";
     }
-    return "object";
   }
   return typeof value;
 }
