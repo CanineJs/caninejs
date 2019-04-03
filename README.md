@@ -31,10 +31,16 @@ import { getType } from 'caninejs';
 var x = { x: 1 };
 var y = ['1', { x: 1 }, [], 'apple'];
 var z = 'caninejs';
+var a = new Map();
+var b = new Error();
+var c = new WeakSet();
 
 getType(x); // returns "object"
 getType(y); // returns "array"
 getType(z); // returns "string"
+getType(a); // returns "map"
+getType(b); // returns "error"
+getType(c); // returns "weakset"
 
 ```
 
