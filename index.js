@@ -51,29 +51,6 @@ export function compare(element1, element2) {
   return true;
 }
 
-function unique(array, isSorted = false, key) {
-  var type = getType(array[0]);
-  var result = [];
-  switch (type) {
-    case "object":
-      return uniqueObjects(array, isSorted, key);
-    case "map":
-      return uniqueMaps(array, isSorted, key);
-    default: {
-      if (!isSorted) {
-        array.sort();
-      }
-      array.forEach((item, index) => {
-        if (index !== array.length - 1 && !compare(item, array[index + 1])) {
-          result.push(item);
-        }
-      });
-      result.push(array[array.length - 1]);
-    }
-  }
-  return result;
-}
-
 // Compare two objects and all of it's children, returns true if both are same.
 export function compareObjects(objectOne, objectTwo) {
   var objectOneKeys = Object.keys(objectOne);
@@ -164,6 +141,29 @@ export function compareArrays(arrayOne, arrayTwo, shouldSort = false) {
   return true;
 }
 
+function unique(array, isSorted = false, key) {
+  var type = getType(array[0]);
+  var result = [];
+  switch (type) {
+    case "object":
+      return uniqueObjects(array, isSorted, key);
+    case "map":
+      return uniqueMaps(array, isSorted, key);
+    default: {
+      if (!isSorted) {
+        array.sort();
+      }
+      array.forEach((item, index) => {
+        if (index !== array.length - 1 && !compare(item, array[index + 1])) {
+          result.push(item);
+        }
+      });
+      result.push(array[array.length - 1]);
+    }
+  }
+  return result;
+}
+
 function uniqueObjects(array, isSorted, key) {
   if (!isSorted) {
     array.sort((x, y) => {
@@ -210,4 +210,78 @@ function uniqueMaps(array, isSorted, key) {
   });
   result.push(array[array.length - 1]);
   return result;
+}
+
+function flatten(value, shallow = false) {
+  const type = getType(value);
+  switch (type) {
+    case "array":
+      return flattenArray(value, shallow);
+    case "object":
+      return flattenObject(value, shallow);
+    case "map":
+      return flattenMap(value, shallow);
+    default:
+      return null;
+  }
+}
+
+function flattenArray(arr, isShallow = false) {
+  var checkObj = {};
+  var flattenArr = function(array, shallow = false, shallowIndex) {
+    var result = [];
+    array.forEach((item, index) => {
+      var type = getType(item);
+      if (type === "array" && (!shallow || !checkObj[shallowIndex])) {
+        if (shallow) {
+          checkObj[index] = true;
+        }
+        result = result.concat(flattenArr(item, shallow, index));
+      } else {
+        result.push(item);
+      }
+    });
+    return result;
+  };
+  return flattenArr(arr, isShallow);
+}
+
+function flattenObject(obj, isShallow = false) {
+  var checkObj = {};
+  var flattenObj = function(object, shallow, shallowIndex) {
+    var result = {};
+    Object.keys(object).forEach((key, index) => {
+      var type = getType(object[key]);
+      if (type === "object" && (!shallow || !checkObj[shallowIndex])) {
+        if (shallow) {
+          checkObj[index] = true;
+        }
+        result = Object.assign(result, flattenObj(object[key], shallow, index));
+      } else {
+        result[key] = object[key];
+      }
+    });
+    return result;
+  };
+  return flattenObj(obj, isShallow);
+}
+
+function flattenMap(mp, isShallow = false) {
+  var checkObj = {};
+  var flattenMp = function(map, shallow, shallowKey) {
+    var result = new Map();
+    for (var [key, value] of map) {
+      var type = getType(value);
+      if (type === "map" && (!shallow || !checkObj[shallowKey])) {
+        if (shallow) {
+          checkObj[key] = true;
+        }
+        result = new Map([...result, ...flattenMp(value, isShallow, key)]);
+      } else {
+        result.set(key, value);
+      }
+    }
+    return result;
+  };
+  return flattenMp(mp, isShallow);
 }
