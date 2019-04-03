@@ -20,6 +20,8 @@ export function getType(value) {
         return "null";
       case "[object Error]":
         return "error";
+      case "[object Date]":
+        return "date";
       default:
         return "object";
     }
