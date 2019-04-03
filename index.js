@@ -219,6 +219,8 @@ function flatten(value, shallow = false) {
       return flattenArray(value, shallow);
     case "object":
       return flattenObject(value, shallow);
+    case "map":
+      return flattenMap(value, shallow);
     default:
       return null;
   }
@@ -262,4 +264,24 @@ function flattenObject(obj, isShallow = false) {
     return result;
   };
   return flattenObj(obj, isShallow);
+}
+
+function flattenMap(mp, isShallow = false) {
+  var checkObj = {};
+  var flattenMp = function(map, shallow, shallowKey) {
+    var result = new Map();
+    for (var [key, value] of map) {
+      var type = getType(value);
+      if (type === "map" && (!shallow || !checkObj[shallowKey])) {
+        if (shallow) {
+          checkObj[key] = true;
+        }
+        result = new Map([...result, ...flattenMp(value, isShallow, key)]);
+      } else {
+        result.set(key, value);
+      }
+    }
+    return result;
+  };
+  return flattenMp(mp, isShallow);
 }
