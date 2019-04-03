@@ -1,6 +1,6 @@
 {
   "name": "caninejs",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Javascript helper library with functions to make programming in js easy.",
   "main": "index.js",
   "scripts": {
