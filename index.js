@@ -217,6 +217,8 @@ function flatten(value, shallow = false) {
   switch (type) {
     case "array":
       return flattenArray(value, shallow);
+    case "object":
+      return flattenObject(value, shallow);
     default:
       return null;
   }
@@ -240,4 +242,24 @@ function flattenArray(arr, isShallow = false) {
     return result;
   };
   return flattenArr(arr, isShallow);
+}
+
+function flattenObject(obj, isShallow = false) {
+  var checkObj = {};
+  var flattenObj = function(object, shallow, shallowIndex) {
+    var result = {};
+    Object.keys(object).forEach((key, index) => {
+      var type = getType(object[key]);
+      if (type === "object" && (!shallow || !checkObj[shallowIndex])) {
+        if (shallow) {
+          checkObj[index] = true;
+        }
+        result = Object.assign(result, flattenObj(object[key], shallow, index));
+      } else {
+        result[key] = object[key];
+      }
+    });
+    return result;
+  };
+  return flattenObj(obj, isShallow);
 }
