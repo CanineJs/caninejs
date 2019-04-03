@@ -141,7 +141,7 @@ export function compareArrays(arrayOne, arrayTwo, shouldSort = false) {
   return true;
 }
 
-function unique(array, isSorted = false, key) {
+export function unique(array, isSorted = false, key) {
   var type = getType(array[0]);
   var result = [];
   switch (type) {
@@ -164,7 +164,7 @@ function unique(array, isSorted = false, key) {
   return result;
 }
 
-function uniqueObjects(array, isSorted, key) {
+export function uniqueObjects(array, isSorted, key) {
   if (!isSorted) {
     array.sort((x, y) => {
       if (x[key] > y[key]) {
@@ -188,7 +188,7 @@ function uniqueObjects(array, isSorted, key) {
   return result;
 }
 
-function uniqueMaps(array, isSorted, key) {
+export function uniqueMaps(array, isSorted, key) {
   if (!isSorted) {
     array.sort((x, y) => {
       if (x.get(key) > y.get(key)) {
@@ -212,7 +212,7 @@ function uniqueMaps(array, isSorted, key) {
   return result;
 }
 
-function flatten(value, shallow = false) {
+export function flatten(value, shallow = false) {
   const type = getType(value);
   switch (type) {
     case "array":
@@ -226,7 +226,7 @@ function flatten(value, shallow = false) {
   }
 }
 
-function flattenArray(arr, isShallow = false) {
+export function flattenArray(arr, isShallow = false) {
   var checkObj = {};
   var flattenArr = function(array, shallow = false, shallowIndex) {
     var result = [];
@@ -246,7 +246,7 @@ function flattenArray(arr, isShallow = false) {
   return flattenArr(arr, isShallow);
 }
 
-function flattenObject(obj, isShallow = false) {
+export function flattenObject(obj, isShallow = false) {
   var checkObj = {};
   var flattenObj = function(object, shallow, shallowIndex) {
     var result = {};
@@ -266,7 +266,7 @@ function flattenObject(obj, isShallow = false) {
   return flattenObj(obj, isShallow);
 }
 
-function flattenMap(mp, isShallow = false) {
+export function flattenMap(mp, isShallow = false) {
   var checkObj = {};
   var flattenMp = function(map, shallow, shallowKey) {
     var result = new Map();
@@ -284,4 +284,17 @@ function flattenMap(mp, isShallow = false) {
     return result;
   };
   return flattenMp(mp, isShallow);
+}
+
+export function getKey(arrays) {
+  if (arrays.length > 0 && typeof arrays[arrays.length - 1] === "string") {
+    return arrays[arrays.length - 1];
+  }
+  return null;
+}
+
+export function union(...arrays) {
+  var key = getKey(arrays);
+  var onlyArrays = key ? arrays.slice(0, arrays.length -1) : arrays;
+  return unique(flatten(onlyArrays, true), false, key);
 }
