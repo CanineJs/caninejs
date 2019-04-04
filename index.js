@@ -308,8 +308,7 @@ export function difference(array, ...arrays) {
       return differenceMaps(array, arrays);
     default: {
       arrays = flatten(arrays);
-      array = array.filter(i => !Boolean(arrays.indexOf(i) > -1));
-      return array;
+      return array.filter(i => !Boolean(arrays.indexOf(i) > -1));
     }
   }
 }
@@ -318,14 +317,42 @@ export function differenceObjects(array, ...arrays) {
   arrays = flatten(arrays);
   var key = getKey(arrays);
   var onlyArrays = key ? arrays.slice(0, arrays.length - 1) : arrays;
-  array = array.filter(i => !Boolean(onlyArrays.indexOf(i[key]) > -1));
-  return array;
+  var filteredArrays = onlyArrays.map(i => i[key]);
+  return array.filter(i => !Boolean(filteredArrays.indexOf(i[key]) > -1));
 }
 
 export function differenceMaps(array, ...arrays) {
   arrays = flatten(arrays);
   var key = getKey(arrays);
   var onlyArrays = key ? arrays.slice(0, arrays.length - 1) : arrays;
-  array = array.filter(i => !Boolean(onlyArrays.indexOf(i.get(key)) > -1));
-  return array;
+  var filteredArrays = onlyArrays.map(i => i.get(key));
+  return array.filter(i => !Boolean(filteredArrays.indexOf(i.get(key)) > -1));
+}
+
+export function without(array, ...arrays) {
+  var type = getType(array[0]);
+  switch (type) {
+    case "object":
+      return withoutObjects(array, arrays);
+    case "map":
+      return withoutMaps(array, arrays);
+    default: {
+      arrays = flatten(arrays);
+      return array.filter(i => !Boolean(arrays.indexOf(i) > -1));
+    }
+  }
+}
+
+export function withoutObjects(array, ...arrays) {
+  arrays = flatten(arrays);
+  var key = getKey(arrays);
+  var onlyArrays = key ? arrays.slice(0, arrays.length - 1) : arrays;
+  return array.filter(i => !Boolean(onlyArrays.indexOf(i[key]) > -1));
+}
+
+export function withoutMaps(array, ...arrays) {
+  arrays = flatten(arrays);
+  var key = getKey(arrays);
+  var onlyArrays = key ? arrays.slice(0, arrays.length - 1) : arrays;
+  return array.filter(i => !Boolean(onlyArrays.indexOf(i.get(key)) > -1));
 }
