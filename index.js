@@ -286,7 +286,7 @@ export function flattenMap(mp, isShallow = false) {
   return flattenMp(mp, isShallow);
 }
 
-export function getKey(arrays) {
+function getKey(arrays) {
   if (arrays.length > 0 && typeof arrays[arrays.length - 1] === "string") {
     return arrays[arrays.length - 1];
   }
