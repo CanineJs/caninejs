@@ -298,3 +298,27 @@ export function union(...arrays) {
   var onlyArrays = key ? arrays.slice(0, arrays.length -1) : arrays;
   return unique(flatten(onlyArrays, true), false, key);
 }
+
+export function difference(array, ...arrays) {
+  var type = getType(array[0]);
+  switch (type) {
+    case "object":
+      return differenceObjects(array, arrays);
+    default: {
+      arrays = flatten(arrays);
+      array = array.filter(i => !Boolean(arrays.indexOf(i) > -1));
+      console.log(array);
+      return array;
+    }
+  }
+}
+
+export function differenceObjects(array, ...arrays) {
+  arrays = flatten(arrays);
+  var key = getKey(arrays);
+  var onlyArrays = key ? arrays.slice(0, arrays.length - 1) : arrays;
+  console.log(arrays);
+  array = array.filter(i => !Boolean(onlyArrays.indexOf(i[key]) > -1));
+  console.log(array);
+  return array;
+}
