@@ -304,10 +304,11 @@ export function difference(array, ...arrays) {
   switch (type) {
     case "object":
       return differenceObjects(array, arrays);
+    case "map":
+      return differenceMaps(array, arrays);
     default: {
       arrays = flatten(arrays);
       array = array.filter(i => !Boolean(arrays.indexOf(i) > -1));
-      console.log(array);
       return array;
     }
   }
@@ -317,8 +318,14 @@ export function differenceObjects(array, ...arrays) {
   arrays = flatten(arrays);
   var key = getKey(arrays);
   var onlyArrays = key ? arrays.slice(0, arrays.length - 1) : arrays;
-  console.log(arrays);
   array = array.filter(i => !Boolean(onlyArrays.indexOf(i[key]) > -1));
-  console.log(array);
+  return array;
+}
+
+export function differenceMaps(array, ...arrays) {
+  arrays = flatten(arrays);
+  var key = getKey(arrays);
+  var onlyArrays = key ? arrays.slice(0, arrays.length - 1) : arrays;
+  array = array.filter(i => !Boolean(onlyArrays.indexOf(i.get(key)) > -1));
   return array;
 }
