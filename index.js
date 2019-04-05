@@ -356,3 +356,7 @@ export function withoutMaps(array, ...arrays) {
   var onlyArrays = key ? arrays.slice(0, arrays.length - 1) : arrays;
   return array.filter(i => !Boolean(onlyArrays.indexOf(i.get(key)) > -1));
 }
+
+export function intersection(arrayOne, arrayTwo) {
+  return arrayOne.filter(i => Boolean(arrayTwo.indexOf(i) > -1));
+}
