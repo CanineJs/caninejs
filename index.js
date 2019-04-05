@@ -356,3 +356,25 @@ export function withoutMaps(array, ...arrays) {
   var onlyArrays = key ? arrays.slice(0, arrays.length - 1) : arrays;
   return array.filter(i => !Boolean(onlyArrays.indexOf(i.get(key)) > -1));
 }
+
+export function intersection(arrayOne, arrayTwo, key) {
+  const type = getType(arrayOne[0]);
+  switch (type) {
+    case "object":
+      return intersectionObjects(arrayOne, arrayTwo, key);
+    case 'map':
+      return intersectionMaps(arrayOne, arrayTwo, key);
+    default:
+      return arrayOne.filter(i => Boolean(arrayTwo.indexOf(i) > -1));
+  }
+}
+
+export function intersectionObjects(arrayOne, arrayTwo, key) {
+  const arrayToCompare = arrayTwo.map(i => i[key]);
+  return arrayOne.filter(i => Boolean(arrayToCompare.indexOf(i[key]) > -1));
+}
+
+export function intersectionMaps(arrayOne, arrayTwo, key) {
+  const arrayToCompare = arrayTwo.map(i => i.get(key));
+  return arrayOne.filter(i => Boolean(arrayToCompare.indexOf(i.get(key)) > -1));
+}
