@@ -378,3 +378,7 @@ export function intersectionMaps(arrayOne, arrayTwo, key) {
   const arrayToCompare = arrayTwo.map(i => i.get(key));
   return arrayOne.filter(i => Boolean(arrayToCompare.indexOf(i.get(key)) > -1));
 }
+
+export function last(array) {
+  return array[array.length - 1];
+}
