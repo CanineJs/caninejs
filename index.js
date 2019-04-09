@@ -386,3 +386,7 @@ export function last(array) {
 export function rest(array, index) {
   return array.slice(index, array.length);
 }
+
+export function until(array, index) {
+  return array.slice(0, index + 1);
+}
