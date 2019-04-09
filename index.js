@@ -382,3 +382,7 @@ export function intersectionMaps(arrayOne, arrayTwo, key) {
 export function last(array) {
   return array[array.length - 1];
 }
+
+export function rest(array, index) {
+  return array.slice(index, array.length);
+}
