@@ -390,3 +390,36 @@ export function rest(array, index) {
 export function until(array, index) {
   return array.slice(0, index + 1);
 }
+
+export function getIndex(value, array, occurance = "all") {
+  switch (occurance) {
+    case "last": {
+      for (var idx = array.length - 1; idx >= 0; idx--) {
+        if (compare(array[idx], value)) {
+          return idx;
+        }
+      }
+      return -1;
+    }
+    case "all": {
+      var occurances = [];
+      array.forEach((item, index) => {
+        if (compare(item, value)) {
+          occurances.push(index);
+        }
+      });
+      return occurances;
+    }
+    default: {
+      var first = -1;
+      array.every((item, index) => {
+        if (compare(item, value)) {
+          first = index;
+          return false;
+        }
+        return true;
+      });
+      return first;
+    }
+  }
+}
