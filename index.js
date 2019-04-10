@@ -423,3 +423,33 @@ export function getIndex(value, array, occurance = "all") {
     }
   }
 }
+
+export function compact(array, flag = "false") {
+  switch (flag) {
+    case "false":
+      return array.filter(i => i);
+    case "empty":
+      var nonEmpty = array.filter(i => {
+        var type = getType(i);
+        switch (type) {
+          case "object":
+            return Boolean(Object.keys(i).length > 0);
+          case "map":
+            return Boolean(i.size > 0);
+          case "array":
+            return Boolean(i.length > 0);
+          case "set":
+            return Boolean(i.size > 0);
+          case "string":
+            return Boolean(i.length > 0);
+          case "number":
+            return Boolean(!isNaN(i));
+          default:
+            return true;
+        }
+      });
+      return nonEmpty;
+    default:
+      return array.filter(i => i);
+  }
+}
