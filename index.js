@@ -1,5 +1,5 @@
 // Get type of element.
-export function getType(value) {
+function getType(value) {
   if (typeof value === "object") {
     switch (Object.prototype.toString.call(value)) {
       case "[object Object]":
@@ -30,7 +30,7 @@ export function getType(value) {
 }
 
 // Compare two elements and all of its children, return true if both are same.
-export function compare(element1, element2) {
+function compare(element1, element2) {
   if (getType(element1) !== getType(element2)) {
     return false;
   }
@@ -52,7 +52,7 @@ export function compare(element1, element2) {
 }
 
 // Compare two objects and all of it's children, returns true if both are same.
-export function compareObjects(objectOne, objectTwo) {
+function compareObjects(objectOne, objectTwo) {
   var objectOneKeys = Object.keys(objectOne);
   var objectTwoKeys = Object.keys(objectTwo);
   if (
@@ -82,7 +82,7 @@ export function compareObjects(objectOne, objectTwo) {
 }
 
 // Compare two Maps and all of it's children, returns true if both are same.
-export function compareMaps(mapOne, mapTwo) {
+function compareMaps(mapOne, mapTwo) {
   if (
     getType(mapOne) !== "map" ||
     getType(mapTwo) !== "map" ||
@@ -110,7 +110,7 @@ export function compareMaps(mapOne, mapTwo) {
 }
 
 // Compare two Arrays and all of it's children, returns true if both are same.
-export function compareArrays(arrayOne, arrayTwo, shouldSort = false) {
+function compareArrays(arrayOne, arrayTwo, shouldSort = false) {
   if (
     getType(arrayOne) !== "array" ||
     getType(arrayTwo) !== "array" ||
@@ -141,7 +141,7 @@ export function compareArrays(arrayOne, arrayTwo, shouldSort = false) {
   return true;
 }
 
-export function unique(array, isSorted = false, key) {
+function unique(array, isSorted = false, key) {
   var type = getType(array[0]);
   var result = [];
   switch (type) {
@@ -164,7 +164,7 @@ export function unique(array, isSorted = false, key) {
   return result;
 }
 
-export function uniqueObjects(array, isSorted, key) {
+function uniqueObjects(array, isSorted, key) {
   if (!isSorted) {
     array.sort((x, y) => {
       if (x[key] > y[key]) {
@@ -188,7 +188,7 @@ export function uniqueObjects(array, isSorted, key) {
   return result;
 }
 
-export function uniqueMaps(array, isSorted, key) {
+function uniqueMaps(array, isSorted, key) {
   if (!isSorted) {
     array.sort((x, y) => {
       if (x.get(key) > y.get(key)) {
@@ -212,7 +212,7 @@ export function uniqueMaps(array, isSorted, key) {
   return result;
 }
 
-export function flatten(value, shallow = false) {
+function flatten(value, shallow = false) {
   const type = getType(value);
   switch (type) {
     case "array":
@@ -226,7 +226,7 @@ export function flatten(value, shallow = false) {
   }
 }
 
-export function flattenArray(arr, isShallow = false) {
+function flattenArray(arr, isShallow = false) {
   var checkObj = {};
   var flattenArr = function(array, shallow = false, shallowIndex) {
     var result = [];
@@ -246,7 +246,7 @@ export function flattenArray(arr, isShallow = false) {
   return flattenArr(arr, isShallow);
 }
 
-export function flattenObject(obj, isShallow = false) {
+function flattenObject(obj, isShallow = false) {
   var checkObj = {};
   var flattenObj = function(object, shallow, shallowIndex) {
     var result = {};
@@ -266,7 +266,7 @@ export function flattenObject(obj, isShallow = false) {
   return flattenObj(obj, isShallow);
 }
 
-export function flattenMap(mp, isShallow = false) {
+function flattenMap(mp, isShallow = false) {
   var checkObj = {};
   var flattenMp = function(map, shallow, shallowKey) {
     var result = new Map();
@@ -293,13 +293,13 @@ function getKey(arrays) {
   return null;
 }
 
-export function union(...arrays) {
+function union(...arrays) {
   var key = getKey(arrays);
   var onlyArrays = key ? arrays.slice(0, arrays.length -1) : arrays;
   return unique(flatten(onlyArrays, true), false, key);
 }
 
-export function difference(array, ...arrays) {
+function difference(array, ...arrays) {
   var type = getType(array[0]);
   switch (type) {
     case "object":
@@ -313,7 +313,7 @@ export function difference(array, ...arrays) {
   }
 }
 
-export function differenceObjects(array, ...arrays) {
+function differenceObjects(array, ...arrays) {
   arrays = flatten(arrays);
   var key = getKey(arrays);
   var onlyArrays = key ? arrays.slice(0, arrays.length - 1) : arrays;
@@ -321,7 +321,7 @@ export function differenceObjects(array, ...arrays) {
   return array.filter(i => !Boolean(filteredArrays.indexOf(i[key]) > -1));
 }
 
-export function differenceMaps(array, ...arrays) {
+function differenceMaps(array, ...arrays) {
   arrays = flatten(arrays);
   var key = getKey(arrays);
   var onlyArrays = key ? arrays.slice(0, arrays.length - 1) : arrays;
@@ -329,7 +329,7 @@ export function differenceMaps(array, ...arrays) {
   return array.filter(i => !Boolean(filteredArrays.indexOf(i.get(key)) > -1));
 }
 
-export function without(array, ...arrays) {
+function without(array, ...arrays) {
   var type = getType(array[0]);
   switch (type) {
     case "object":
@@ -343,21 +343,21 @@ export function without(array, ...arrays) {
   }
 }
 
-export function withoutObjects(array, ...arrays) {
+function withoutObjects(array, ...arrays) {
   arrays = flatten(arrays);
   var key = getKey(arrays);
   var onlyArrays = key ? arrays.slice(0, arrays.length - 1) : arrays;
   return array.filter(i => !Boolean(onlyArrays.indexOf(i[key]) > -1));
 }
 
-export function withoutMaps(array, ...arrays) {
+function withoutMaps(array, ...arrays) {
   arrays = flatten(arrays);
   var key = getKey(arrays);
   var onlyArrays = key ? arrays.slice(0, arrays.length - 1) : arrays;
   return array.filter(i => !Boolean(onlyArrays.indexOf(i.get(key)) > -1));
 }
 
-export function intersection(arrayOne, arrayTwo, key) {
+function intersection(arrayOne, arrayTwo, key) {
   const type = getType(arrayOne[0]);
   switch (type) {
     case "object":
@@ -369,29 +369,29 @@ export function intersection(arrayOne, arrayTwo, key) {
   }
 }
 
-export function intersectionObjects(arrayOne, arrayTwo, key) {
+function intersectionObjects(arrayOne, arrayTwo, key) {
   const arrayToCompare = arrayTwo.map(i => i[key]);
   return arrayOne.filter(i => Boolean(arrayToCompare.indexOf(i[key]) > -1));
 }
 
-export function intersectionMaps(arrayOne, arrayTwo, key) {
+function intersectionMaps(arrayOne, arrayTwo, key) {
   const arrayToCompare = arrayTwo.map(i => i.get(key));
   return arrayOne.filter(i => Boolean(arrayToCompare.indexOf(i.get(key)) > -1));
 }
 
-export function last(array) {
+function last(array) {
   return array[array.length - 1];
 }
 
-export function rest(array, index) {
+function rest(array, index) {
   return array.slice(index, array.length);
 }
 
-export function until(array, index) {
+function until(array, index) {
   return array.slice(0, index + 1);
 }
 
-export function getIndex(value, array, occurance = "all") {
+function getIndex(value, array, occurance = "all") {
   switch (occurance) {
     case "last": {
       for (var idx = array.length - 1; idx >= 0; idx--) {
@@ -424,7 +424,7 @@ export function getIndex(value, array, occurance = "all") {
   }
 }
 
-export function compact(array, flag = "false") {
+function compact(array, flag = "false") {
   switch (flag) {
     case "false":
       return array.filter(i => i);
@@ -453,3 +453,33 @@ export function compact(array, flag = "false") {
       return array.filter(i => i);
   }
 }
+
+module.exports = {
+  getType,
+  compare,
+  compareObjects,
+  compareMaps,
+  compareArrays,
+  unique,
+  uniqueObjects,
+  uniqueMaps,
+  flatten,
+  flattenArray,
+  flattenObject,
+  flattenMap,
+  union,
+  difference,
+  differenceObjects,
+  differenceMaps,
+  without,
+  withoutObjects,
+  withoutMaps,
+  intersection,
+  intersectionObjects,
+  intersectionMaps,
+  last,
+  rest,
+  until,
+  getIndex,
+  compact
+};
