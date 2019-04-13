@@ -454,6 +454,15 @@ function compact(array, flag = "false") {
   }
 }
 
+function map(iteratee, func) {
+  var result = [];
+  var length = iteratee.length - 1;
+  for (var idx = 0; idx <= length; idx++) {
+    result.push(func(iteratee[idx], idx));
+  }
+  return result;
+}
+
 module.exports = {
   getType,
   compare,
@@ -481,5 +490,6 @@ module.exports = {
   rest,
   until,
   getIndex,
-  compact
+  compact,
+  map
 };
