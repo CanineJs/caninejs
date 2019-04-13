@@ -475,6 +475,16 @@ function filter(iteratee, func, thisArg) {
   return result;
 }
 
+function forEach(iteratee, func, thisArg) {
+  var result = [];
+  var length = iteratee.length - 1;
+  func = func.bind(thisArg);
+  for (var idx = 0; idx <= length; idx++) {
+    func(iteratee[idx], idx, iteratee, thisArg);
+  }
+  return result;
+}
+
 module.exports = {
   getType,
   compare,
@@ -504,5 +514,6 @@ module.exports = {
   getIndex,
   compact,
   map,
-  filter
+  filter,
+  forEach
 };
