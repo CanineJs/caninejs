@@ -463,6 +463,18 @@ function map(iteratee, func) {
   return result;
 }
 
+function filter(iteratee, func, thisArg) {
+  var result = [];
+  var length = iteratee.length - 1;
+  func = func.bind(thisArg);
+  for (var idx = 0; idx <= length; idx++) {
+    if (Boolean(func(iteratee[idx], idx, iteratee, thisArg))) {
+      result.push(iteratee[idx]);
+    }
+  }
+  return result;
+}
+
 module.exports = {
   getType,
   compare,
@@ -491,5 +503,6 @@ module.exports = {
   until,
   getIndex,
   compact,
-  map
+  map,
+  filter
 };
