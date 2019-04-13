@@ -485,6 +485,17 @@ function forEach(iteratee, func, thisArg) {
   return result;
 }
 
+function every(iteratee, func, thisArg) {
+  var length = iteratee.length - 1;
+  func = func.bind(thisArg);
+  for (var idx = 0; idx <= length; idx++) {
+    if (!Boolean(func(iteratee[idx], idx, iteratee, thisArg))) {
+      return false;
+    }
+  }
+  return true;
+}
+
 module.exports = {
   getType,
   compare,
@@ -515,5 +526,6 @@ module.exports = {
   compact,
   map,
   filter,
-  forEach
+  forEach,
+  every
 };
