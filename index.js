@@ -496,6 +496,48 @@ function every(iteratee, func, thisArg) {
   return true;
 }
 
+//Returns all the keys of an object
+function listAllKeys(obj) {
+  if(getType(obj) !== "object") return [];
+  let keys = [];
+  for(let key of Object.keys(obj)) keys.push(key);
+  return keys;
+}
+
+//List all the values of an object
+function listAllValues(obj) {
+  if(getType(obj) !== "object") return [];
+  let values = [];
+  for(let key of Object.keys(obj)) values.push(obj[key]);
+  return values;
+}
+
+//Returns the size of string or object or array passed in as element
+function length(element) {
+  const type = getType(element);
+  if(type === "object") return listAllKeys(element).length;
+  if(type === "boolean") return 0;
+  if(type === "number") return Math.ceil(Math.log10(element + 1));
+  return element.length;
+}
+
+function split(string, separator) {
+  if(getType(string) !== "string") return [];
+  if(separator === "") return [string];
+  let splitted = [];
+  let fromIndex = 0;
+  for (idx=0; idx<string.length; idx++) {
+    if(string[idx] === separator) {
+      separated = string.slice(fromIndex, idx);
+      splitted.push(separated);
+      fromIndex = idx + 1;
+    }
+  }
+  splitted.push(string.slice(fromIndex, idx));
+  return splitted;
+}
+
+
 module.exports = {
   getType,
   compare,
@@ -527,5 +569,9 @@ module.exports = {
   map,
   filter,
   forEach,
-  every
+  every,
+  listAllKeys,
+  listAllValues,
+  length,
+  split,
 };
