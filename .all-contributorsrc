@@ -15,6 +15,17 @@
       "avatar_url": "https://avatars2.githubusercontent.com/u/19948507?v=4",
       "profile": "https://github.com/SreeKrishnaRaja",
       "contributions": [
+        "code",
+        "doc",
+        "review"
+      ]
+    },
+    {
+      "login": "votaryvirile",
+      "name": "Vimal Radhakrishnan",
+      "avatar_url": "https://avatars.githubusercontent.com/u/36742317?v=4",
+      "profile": "https://github.com/votaryvirile",
+      "contributions": [
         "code"
       ]
     }
