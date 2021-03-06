@@ -537,6 +537,80 @@ function split(string, separator) {
   return splitted;
 }
 
+function hasOwnProperty(obj, key) {
+  for(let objKey of Object.keys(obj)) {
+    if(key === objKey) return true;
+  }
+  return false;
+}
+
+function invert(obj) {
+  if(getType(obj) !== "object") return new Error("Please supply Object");
+  let newObj = {};
+  for(let key of Object.keys(obj)) {
+    if(hasOwnProperty(newObj, obj[key])) return new Error("Value must be unique");
+    if(getType(obj[key]) !== "string") return new Error("Value must be string serialized")
+    newObj[obj[key]] = key;
+  }
+  return newObj;
+}
+
+function contains(list, item) {
+  for(idx=0; idx<list.length; idx++) {
+    if(list[idx] === item) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function concatArrays(x, y, unique) {
+  if(getType(x) !== "array" || getType(y) !== "array") {
+    return x = [x, y];
+  }
+  for(idx=0; idx<length(y); idx++) {
+    if(!unique) {
+      x[length(x)] = y[idx];  
+    } else {
+      if(!contains(x, y[idx])) {
+        x[length(x)] = y[idx];
+      } 
+    }
+    
+  }
+  return x;
+}
+
+function concatObjects(x, y) {
+  if(getType(x) !== "object" || getType(y) !== "object") return new Error("Either or both the parameters is not an object");
+  for(let key of Object.keys(y)) {
+    x[key] = y[key];
+  }
+  return x;
+}
+
+function merge(x, y) {
+  if(getType(x) !== "object" || getType(y) !== "object") return;
+  
+  for(let key of Object.keys(y)) {
+    if(x.hasOwnProperty(key)) {
+      const keyType = getType(x[key]);
+      if(keyType === "object") {
+        for(let innerKey of Object.keys(y[key])) {
+          x[key][innerKey] = y[key][innerKey]
+        }
+      }
+      else if(keyType === "array") {
+        for(idx=0; idx<length(y[key]); idx++) {
+          x[key][length(x[key])] = y[key][idx];  
+        }
+      } else x[key] = y[key]; //Suchwise key value is replaced in x with y 
+    } else {
+      x[length(x)] = y[key];
+    }
+  }
+  return x;
+}
 
 module.exports = {
   getType,
@@ -574,4 +648,10 @@ module.exports = {
   listAllValues,
   length,
   split,
+  findKey,
+  invert,
+  contains,
+  concatArrays,
+  concatObjects,
+  merge,
 };
