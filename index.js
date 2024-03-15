@@ -1,33 +1,4 @@
-// Get type of element.
-function getType(value) {
-  if (typeof value === "object") {
-    switch (Object.prototype.toString.call(value)) {
-      case "[object Object]":
-        return "object";
-      case "[object Array]":
-        return "array";
-      case "[object Map]":
-        return "map";
-      case "[object Set]":
-        return "set";
-      case "[object WeakMap]":
-        return "weakmap";
-      case "[object WeakSet]":
-        return "weakset";
-      case "[object Function]":
-        return "function";
-      case "[object Null]":
-        return "null";
-      case "[object Error]":
-        return "error";
-      case "[object Date]":
-        return "date";
-      default:
-        return "object";
-    }
-  }
-  return typeof value;
-}
+import getType from "./libs/getType";
 
 // Compare two elements and all of its children, return true if both are same.
 function compare(element1, element2) {
