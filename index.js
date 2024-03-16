@@ -3,77 +3,9 @@ import compare from "./libs/compare";
 import compareArrays from "./libs/compareArrays";
 import compareObjects from "./libs/compareObjects";
 import compareMaps from "./libs/compareMaps";
-
-function unique(array, isSorted = false, key) {
-  var type = getType(array[0]);
-  var result = [];
-  switch (type) {
-    case "object":
-      return uniqueObjects(array, isSorted, key);
-    case "map":
-      return uniqueMaps(array, isSorted, key);
-    default: {
-      if (!isSorted) {
-        array.sort();
-      }
-      array.forEach((item, index) => {
-        if (index !== array.length - 1 && !compare(item, array[index + 1])) {
-          result.push(item);
-        }
-      });
-      result.push(array[array.length - 1]);
-    }
-  }
-  return result;
-}
-
-function uniqueObjects(array, isSorted, key) {
-  if (!isSorted) {
-    array.sort((x, y) => {
-      if (x[key] > y[key]) {
-        return 1;
-      } else if (x[key] < y[key]) {
-        return -1;
-      }
-      return 0;
-    });
-  }
-  var result = [];
-  array.forEach((item, index) => {
-    if (
-      index !== array.length - 1 &&
-      !compare(item[key], array[index + 1][key])
-    ) {
-      result.push(item);
-    }
-  });
-  result.push(array[array.length - 1]);
-  return result;
-}
-
-function uniqueMaps(array, isSorted, key) {
-  if (!isSorted) {
-    array.sort((x, y) => {
-      if (x.get(key) > y.get(key)) {
-        return 1;
-      } else if (x.get(key) < y.get(key)) {
-        return -1;
-      }
-      return 0;
-    });
-  }
-  var result = [];
-  array.forEach((item, index) => {
-    if (
-      index !== array.length - 1 &&
-      !compare(item.get(key), array[index + 1].get(key))
-    ) {
-      result.push(item);
-    }
-  });
-  result.push(array[array.length - 1]);
-  return result;
-}
+import unique from "./libs/unique";
+import uniqueMaps from "./libs/uniqueMaps";
+import uniqueObjects from "./libs/uniqueObjects";
 
 function flatten(value, shallow = false) {
   const type = getType(value);
